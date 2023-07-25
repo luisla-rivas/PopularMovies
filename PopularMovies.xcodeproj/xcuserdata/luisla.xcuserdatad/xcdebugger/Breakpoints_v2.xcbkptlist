@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "ECF66BA8-A81A-4862-BAAD-B8A4AB2BB8CF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PopularMoviesTests/PopularMoviesTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "testGetGenres()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4 - 818ad0505f9ab379"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PopularMoviesTests.PopularMoviesTests.testGetGenres() async throws -&gt; Swift.Array&lt;PopularMovies.Genre&gt;"
+                  moduleName = "PopularMoviesTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisla/Developer/luisla_rivas/PopularMovies/PopularMoviesTests/PopularMoviesTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4 - eee5ca3ea7fc1176"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for PopularMoviesTests.PopularMoviesTests.testGetGenres() async throws -&gt; Swift.Array&lt;PopularMovies.Genre&gt;"
+                  moduleName = "PopularMoviesTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/luisla/Developer/luisla_rivas/PopularMovies/PopularMoviesTests/PopularMoviesTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

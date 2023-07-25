@@ -6,16 +6,26 @@
 //
 
 import SwiftUI
+enum TabItem {
+  case popular, setting
+}
 
 struct ContentView: View {
+    @State private var selection: TabItem = .popular
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selection) {
+            PopularMoviesListView()
+                .tabItem {
+                    Label("Popular", systemImage: "list.and.film")
+                    }
+                .tag(TabItem.popular)
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                    }
+                .tag(TabItem.setting)
         }
-        .padding()
     }
 }
 

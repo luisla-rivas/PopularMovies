@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct PopularMoviesApp: App {
+    @AppStorage("preferredColorScheme") var preferredColorScheme: Int = 0
+    
+    @StateObject var monitorNetwork = NetworkStatus()
     @StateObject var appVM = MoviesVM()
     
     let configuration = Configuration.shared
@@ -16,15 +19,21 @@ struct PopularMoviesApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appVM)
+                .preferredColorScheme(ColorScheme.init(
+                    .init(rawValue: preferredColorScheme) ?? .light))
+                .overlay {
+                    if monitorNetwork.status == .offline {
+                        AppOfflineView()
+                            .transition(.opacity)
+                    }
+                }
+            
 //                .overlay {
-//                    if appVM.loading != .data {
+//                    if appVM.loading != true {
 //                        LoadingView()
 //                            .transition(.opacity)
 //                    }
-//                    .animation (.default, value: appVM.loading)
-//                    .onAppear {
-//                        print(URL.documentsDirectory)
-//                    }
+//                    .animation(.default, value: appVM.loading)
 //                }
         }
     }

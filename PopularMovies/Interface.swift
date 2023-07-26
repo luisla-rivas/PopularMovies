@@ -6,7 +6,7 @@
 //
 
 import Foundation
-let bearerToken = "eyJh---TOKEN----xx4w"
+let bearerToken = "eyJh--TOKEN--xx4w"
 
 extension URLQueryItem {
     static let language = URLQueryItem(name: "language", value: "es")
@@ -26,7 +26,7 @@ extension URL {
     static func popularMovies(language: String) -> URL {
         let queryLanguage = URLQueryItem(name: "language", value: language)
         let url = movieAPI.appending(path: "movie/popular").appending(queryItems: [queryLanguage, .region])
-        print("URL:  \(url)")
+        //print("URL:  \(url)")
         return url
     }
     static func getGenres(language: String) -> URL {

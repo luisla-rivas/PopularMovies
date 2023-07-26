@@ -9,21 +9,46 @@ import SwiftUI
 
 struct PopularMoviesListView: View {
     @EnvironmentObject var appVM:MoviesVM
-    //@Namespace var namespace
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(appVM.movies) { movie in
-                    NavigationLink(value: movie) {
-                        RowView(vm: RowVM(movie: movie))
+            Group {
+                if !appVM.movies.isEmpty {
+                    List {
+                        ForEach(appVM.movies) { movie in
+                            NavigationLink(value: movie) {
+                                RowView(vm: RowVM(movie: movie))
+                            }
+                        }
+
                     }
+                    .listStyle(.plain)
+                    .navigationTitle("Popular movies")
+                    .navigationDestination(for: MovieResult.self) { movie in
+                        MovieDetailView(vm: DetailVM(movie: movie))
+                    }
+                } else {
+                    VStack {
+                        Text("There are no data to show!")
+                            
+                        Button {
+                            Task { await appVM.initData() }
+                        } label: {
+                            Text("Try again!")
+                        }.buttonStyle(.bordered)
+                    }
+                    .navigationTitle("Popular movies")
                 }
             }
-            .listStyle(.plain)
-            .navigationTitle("Popular movies")
-            .navigationDestination(for: MovieResult.self) { movie in
-                MovieDetailView(vm: DetailVM(movie: movie))
+            .alert("Network alert!",
+                   isPresented: $appVM.showError) {
+                Button {
+                    appVM.errorMsg = ""
+                } label: {
+                    Text("OK")
+                }
+            } message: {
+                Text(appVM.errorMsg)
             }
         }
     }

@@ -45,7 +45,7 @@ struct SettingsView: View {
             }
             .onChange(of: selectedLanguage) { selected in
                 appVM.languageID = selected
-                print(appVM.languageID)
+                //print(appVM.languageID)
                 Task { await appVM.initData() }
             }
             .navigationTitle("Settings")

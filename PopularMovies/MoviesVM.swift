@@ -19,6 +19,15 @@ final class MoviesVM:ObservableObject {
     
     @Published var loading = true
     
+    @Published var showError = false
+    @Published var errorMsg = "" {
+        didSet {
+            if !errorMsg.isEmpty {
+                showError.toggle()
+            }
+        }
+    }
+    
     init(persistence: PersistenceProtocol = ModelPersistence.shared) {
         self.persistence = persistence
         self.languageID = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "en"
@@ -28,12 +37,14 @@ final class MoviesVM:ObservableObject {
     @MainActor func initData() async {
         do {
             (genres, movies) = try await (persistence.getGenres(language: languageID), persistence.getPopular(language: languageID))
- 
+            //movies = []
             //try await Task.sleep(for: .seconds(1))
             loading = false
-            print("loaded")
+            //print("loaded")
+        } catch let error as NetworkError {
+            errorMsg = error.description
         } catch {
-            print(error)
+            errorMsg = error.localizedDescription
         }
     }
     

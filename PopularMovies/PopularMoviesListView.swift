@@ -32,12 +32,14 @@ struct PopularMoviesListView: View {
                         Text("There are no data to show!")
                             
                         Button {
+                            appVM.loading = true
                             Task { await appVM.initData() }
                         } label: {
                             Text("Try again!")
                         }.buttonStyle(.bordered)
                     }
                     .navigationTitle("Popular movies")
+                    .offset(y: -30)
                 }
             }
             .alert("Network alert!",
@@ -51,6 +53,13 @@ struct PopularMoviesListView: View {
                 Text(appVM.errorMsg)
             }
         }
+        .overlay {
+            if appVM.loading == true {
+                LoadingView()
+                    .transition(.opacity)
+            }
+        }
+        .animation(.default, value: appVM.loading)
     }
 }
 

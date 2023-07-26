@@ -61,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		100ED1452A718C7E00D0A41A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		10542B6C2A6FBD5C00F0D8A7 /* ModelsDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsDefinition.swift; sourceTree = "<group>"; };
 		10542B6E2A6FBD6800F0D8A7 /* ModelsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsAPI.swift; sourceTree = "<group>"; };
 		10542B702A6FC7FD00F0D8A7 /* ModelPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModelPersistence.swift; path = PopularMovies/ModelPersistence.swift; sourceTree = SOURCE_ROOT; };
@@ -199,6 +200,7 @@
 		10542B9C2A6FEB2E00F0D8A7 /* PopularMoviesUITests */ = {
 			isa = PBXGroup;
 			children = (
+				100ED1452A718C7E00D0A41A /* Info.plist */,
 				10542B9D2A6FEB2E00F0D8A7 /* PopularMoviesUITests.swift */,
 				10542B9F2A6FEB2E00F0D8A7 /* PopularMoviesUITestsLaunchTests.swift */,
 			);
@@ -516,6 +518,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5LHT3Z587H;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PopularMoviesUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
@@ -537,6 +541,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5LHT3Z587H;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PopularMoviesUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;

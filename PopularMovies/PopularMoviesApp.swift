@@ -29,14 +29,6 @@ struct PopularMoviesApp: App {
                             .transition(.opacity)
                     }
                 }
-            
-//                .overlay {
-//                    if appVM.loading != true {
-//                        LoadingView()
-//                            .transition(.opacity)
-//                    }
-//                    .animation(.default, value: appVM.loading)
-//                }
         }
     }
 }

@@ -25,14 +25,6 @@ struct PopularMoviePage: Codable {
     }
 }
 
-
-//enum OriginalLanguage: String, Codable {
-//    case en = "en"
-//    case es = "es"
-//    case pl = "pl"
-//    case uk = "uk"
-//}
-
 // MARK: - GenresAPI
 struct GenresAPI: Codable {
     let genres: [Genre]
@@ -67,3 +59,20 @@ struct Images: Codable {
         case stillSizes = "still_sizes"
     }
 }
+
+
+//   let languages = try? JSONDecoder().decode(Languages.self, from: jsonData)
+
+// MARK: - Language
+struct Language: Codable, Identifiable, Hashable {
+    let id, name, nativeName: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "iso_639_1"
+        case name = "english_name"
+        case nativeName = "name"
+    }
+}
+
+typealias Languages = [Language]
+typealias Iso_639_1 = String

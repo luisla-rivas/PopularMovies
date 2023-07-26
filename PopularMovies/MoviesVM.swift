@@ -9,25 +9,29 @@ import SwiftUI
 
 final class MoviesVM:ObservableObject {
     let persistence: PersistenceProtocol
+
     
     @Published var genres:[Genre] = []
     @Published var movies:[MovieResult] = []
     
     @Published var selectedMovie:MovieResult?
+    @Published var languageID: Iso_639_1 = "en"
     
     @Published var loading = true
     
     init(persistence: PersistenceProtocol = ModelPersistence.shared) {
         self.persistence = persistence
+        self.languageID = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "en"
         Task { await initData() }
     }
     
     @MainActor func initData() async {
         do {
-            (genres, movies) = try await (persistence.getGenres(), persistence.getPopular())
-            //(genres, movies) = try await (persistence.getGenres(), persistence.getNowPlaying())
-            try await Task.sleep(for: .seconds(1))
+            (genres, movies) = try await (persistence.getGenres(language: languageID), persistence.getPopular(language: languageID))
+ 
+            //try await Task.sleep(for: .seconds(1))
             loading = false
+            print("loaded")
         } catch {
             print(error)
         }
@@ -40,6 +44,15 @@ final class MoviesVM:ObservableObject {
     func getBackdropPath(backdropPath:String) -> URL {
         .getImageURL(path: backdropPath, conf: self.persistence.configuration.images, type: .backdrop)
     }
+    
+    let languages = [
+        Language(id: "en", name: "English", nativeName: "English"),
+        Language(id: "es", name: "Spanish", nativeName: "Español"),
+        Language(id: "fr", name: "French", nativeName: "Français"),
+        Language(id: "de", name: "German", nativeName: "Deutsch"),
+    ]
+    
+    let defaultLanguage = Language(id:"en", name: "English", nativeName: "English")
 }
 
 

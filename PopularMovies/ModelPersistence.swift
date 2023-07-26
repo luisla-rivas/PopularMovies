@@ -9,8 +9,8 @@ import SwiftUI
 
 protocol PersistenceProtocol {
     var configuration: ConfigurationAPI { get }
-    func getGenres() async throws -> [Genre]
-    func getPopular() async throws -> [MovieResult]
+    func getGenres(language: String) async throws -> [Genre]
+    func getPopular(language: String) async throws -> [MovieResult]
     func getConfiguration() async throws -> ConfigurationAPI
     func getPoster(posterPath:String, callback: @escaping (UIImage?) -> Void)
 }
@@ -32,16 +32,16 @@ final class ModelPersistence: PersistenceProtocol {
         }
     }
     
-    func getGenres() async throws -> [Genre] {
-        try await Network.shared.getJSON(request: .get(url: .getGenres, token: APIKEY), type: GenresAPI.self).genres
+    func getGenres(language: String) async throws -> [Genre] {
+        try await Network.shared.getJSON(request: .get(url: .getGenres(language: language), token: bearerToken), type: GenresAPI.self).genres
     }
     
-    func getPopular() async throws -> [MovieResult] {
-        try await Network.shared.getJSON(request: .get(url: .popularMovies, token: APIKEY), type: PopularMoviePage.self, decoder: .decoderWithDate).results
+    func getPopular(language: String) async throws -> [MovieResult] {
+        try await Network.shared.getJSON(request: .get(url: .popularMovies(language: language), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
     }
     
     func getConfiguration() async throws -> ConfigurationAPI {
-        try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: APIKEY), type: ConfigurationAPI.self)
+        try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: bearerToken), type: ConfigurationAPI.self)
     }
     
     func getPoster(posterPath:String, callback: @escaping (UIImage?) -> Void) {

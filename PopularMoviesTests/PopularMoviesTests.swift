@@ -26,19 +26,19 @@ final class PopularMoviesTests: XCTestCase {
     
     
     func testGetGenres() async throws -> [Genre] {
-        try await Network.shared.getJSON(request: .get(url: .getGenres, token: APIKEY), type: GenresAPI.self).genres
+        try await Network.shared.getJSON(request: .get(url: .getGenres, token: bearerToken), type: GenresAPI.self).genres
     }
     
 //    func testGetPopular() async throws -> [MovieResult] {
-//        try await Network.shared.getJSON(request: .get(url: .popularMovies, token: APIKEY), type: PopularMoviePage.self, decoder: .decoderWithDate).results
+//        try await Network.shared.getJSON(request: .get(url: .popularMovies, token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
 //    }
 //
 //    func testGetNowPlaying() async throws -> [MovieResult] {
-//        try await Network.shared.getJSON(request: .get(url: .nowPlaying, token: APIKEY), type: PopularMoviePage.self, decoder: .decoderWithDate).results
+//        try await Network.shared.getJSON(request: .get(url: .nowPlaying, token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
 //    }
 //
 //    func testGetConfiguration() async throws -> ConfigurationAPI {
-//        try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: APIKEY), type: ConfigurationAPI.self)
+//        try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: bearerToken), type: ConfigurationAPI.self)
 //    }
 //
 //    func testGetPoster(posterPath:String, callback: @escaping (UIImage?) -> Void) {

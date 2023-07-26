@@ -27,7 +27,7 @@ final class PersistencePreview: PersistenceProtocol {
         
     }
     
-    func getGenres() async throws -> [Genre] {
+    func getGenres(language: String) async throws -> [Genre] {
         guard let url = URL.genresTestURL,
               let genres = try? loadJSON(url: url, of: [Genre].self) else {
             throw NetworkError.badFilename
@@ -35,7 +35,7 @@ final class PersistencePreview: PersistenceProtocol {
         return genres
     }
     
-    func getPopular() async throws -> [MovieResult] {
+    func getPopular(language: String) async throws -> [MovieResult] {
         guard let url = URL.popularMoviesTestURL,
               let page = try? loadJSON(url: url, of: PopularMoviePage.self) else {
             throw NetworkError.badFilename

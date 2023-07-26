@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct PopularMoviesApp: App {
     @AppStorage("preferredColorScheme") var preferredColorScheme: Int = 0
+    @AppStorage("selectedLanguage", store: .standard) var selectedLanguage: String = "en"
     
     @StateObject var monitorNetwork = NetworkStatus()
     @StateObject var appVM = MoviesVM()
@@ -21,6 +22,7 @@ struct PopularMoviesApp: App {
                 .environmentObject(appVM)
                 .preferredColorScheme(ColorScheme.init(
                     .init(rawValue: preferredColorScheme) ?? .light))
+                .environment(\.locale, Locale(identifier: selectedLanguage))
                 .overlay {
                     if monitorNetwork.status == .offline {
                         AppOfflineView()

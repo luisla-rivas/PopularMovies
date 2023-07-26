@@ -27,8 +27,8 @@ final class PersistenceTest: XCTestCase {
         XCTAssertEqual(URL.getGenres.scheme, "https")
         XCTAssertEqual(URL.getGenres.host, "api.themoviedb.org")
         XCTAssertEqual(URL.getGenres.relativePath, "/3/genre/movie/list")
-        //XCTAssertNoThrow(try await network.getJSON(request: .get(url: .getGenres, token: APIKEY), type: GenresAPI.self), "")
-        let genres = try await Network.shared.getJSON(request: .get(url: .getGenres, token: APIKEY), type: GenresAPI.self).genres
+        //XCTAssertNoThrow(try await network.getJSON(request: .get(url: .getGenres, token: bearerToken), type: GenresAPI.self), "")
+        let genres = try await Network.shared.getJSON(request: .get(url: .getGenres, token: bearerToken), type: GenresAPI.self).genres
         XCTAssertGreaterThan(genres.count, 0)
     }
     
@@ -36,7 +36,7 @@ final class PersistenceTest: XCTestCase {
         XCTAssertEqual(URL.popularMovies.scheme, "https")
         XCTAssertEqual(URL.popularMovies.host, "api.themoviedb.org")
         XCTAssertEqual(URL.popularMovies.relativePath, "/3/movie/popular")
-        let popularMovies = try await Network.shared.getJSON(request: .get(url: .popularMovies, token: APIKEY), type: PopularMoviePage.self, decoder: .decoderWithDate).results
+        let popularMovies = try await Network.shared.getJSON(request: .get(url: .popularMovies, token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
         XCTAssertGreaterThan(popularMovies.count, 0)
     }
 
@@ -44,7 +44,7 @@ final class PersistenceTest: XCTestCase {
         XCTAssertEqual(URL.popularMovies.scheme, "https")
         XCTAssertEqual(URL.popularMovies.host, "api.themoviedb.org")
         XCTAssertEqual(URL.popularMovies.relativePath, "/3/movie/popular")
-        let config = try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: APIKEY), type: ConfigurationAPI.self)
+        let config = try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: bearerToken), type: ConfigurationAPI.self)
         XCTAssertFalse(config.images.secureBaseURL.pathComponents.isEmpty, "")
     }
 

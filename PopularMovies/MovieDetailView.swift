@@ -18,27 +18,36 @@ struct MovieDetailView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(alignment: .top)
-                    .cornerRadius(10)
-                    .padding(5)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .padding(.horizontal, 40)
 //                    .matchedGeometryEffect(id: "cover\(cellVM.movie.id)", in: namespace)
             } else {
-                Rectangle()
-                    .fill(.background)
-                    .frame(width: 80)
+                Image(systemName: "popcorn")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150  ,height: 200)
+                    .padding()
+                    .background(Color.secondary)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
             }
-            VStack {
+            VStack(alignment: .center) {
                 Text(vm.movie.title)
+                    .font(.title2)
+                    .multilineTextAlignment(.center)
                 Text(vm.movie.originalTitle)
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                PopularityAndRateView(movie: vm.movie, showVotes: false).padding(.vertical)
                     .font(.footnote)
-                PopularityAndRateView(movie: vm.movie, showVotes: false)
-                .font(.footnote)
-
+            }.padding(.horizontal)
+            VStack(alignment: .leading) {
                 Text(vm.movie.overview)
                     .font(.body)
                 
             }
             .padding(.horizontal)
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

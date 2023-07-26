@@ -25,7 +25,7 @@ final class Configuration {
             }
             
             func getConfiguration() async throws -> ConfigurationAPI {
-                try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: APIKEY),
+                try await Network.shared.getJSON(request: .get(url: .getConfiguration, token: bearerToken),
                                                     type: ConfigurationAPI.self)
             }
         }

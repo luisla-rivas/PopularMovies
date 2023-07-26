@@ -8,13 +8,14 @@
 import SwiftUI
 
 final class RowVM:ObservableObject {
-    let persistence = ModelPersistence.shared
+    let persistence: PersistenceProtocol
     
     @Published var poster:UIImage?
     
     let movie:MovieResult
     
-    init(movie:MovieResult) {
+    init(movie:MovieResult, persistence: PersistenceProtocol) {
+        self.persistence = persistence
         self.movie = movie
         persistence.getPoster(posterPath: movie.posterPath) { poster in
             self.poster = poster

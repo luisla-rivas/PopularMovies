@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PopularMoviesTests/PopularMoviesTests.swift"
@@ -21,7 +21,7 @@
             <Locations>
                <Location
                   uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4 - 818ad0505f9ab379"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PopularMoviesTests.PopularMoviesTests.testGetGenres() async throws -&gt; Swift.Array&lt;PopularMovies.Genre&gt;"
@@ -36,7 +36,7 @@
                </Location>
                <Location
                   uuid = "86426C41-A1F6-4A5F-BA3E-1658AEFA65A4 - eee5ca3ea7fc1176"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(1) suspend resume partial function for PopularMoviesTests.PopularMoviesTests.testGetGenres() async throws -&gt; Swift.Array&lt;PopularMovies.Genre&gt;"

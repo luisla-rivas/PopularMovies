@@ -44,7 +44,7 @@ struct RowView: View {
 
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
-        RowView(vm: RowVM(movie: .preview))
+        RowView(vm: RowVM(movie: .preview, persistence: PersistencePreview.shared))
             .environmentObject(MoviesVM.preview)
             .padding(.horizontal)
     }

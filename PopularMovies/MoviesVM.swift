@@ -40,7 +40,7 @@ final class MoviesVM:ObservableObject {
             //movies = []
             //try await Task.sleep(for: .seconds(1))
             loading = false
-            //print("loaded")
+            print("loaded")
         } catch let error as NetworkError {
             errorMsg = error.description
         } catch {
@@ -54,6 +54,16 @@ final class MoviesVM:ObservableObject {
     
     func getBackdropPath(backdropPath:String) -> URL {
         .getImageURL(path: backdropPath, conf: self.persistence.configuration.images, type: .backdrop)
+    }
+    
+    func genresFor(_ movie: MovieResult) -> [String] {
+        if !movie.genreIDS.isEmpty {
+            return movie.genreIDS.compactMap { numericCode in
+                genres.first(where: { $0.id == numericCode })?.name
+            }
+        } else {
+            return []
+        }
     }
     
     let languages = [

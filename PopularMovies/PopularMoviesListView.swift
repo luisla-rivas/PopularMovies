@@ -17,15 +17,18 @@ struct PopularMoviesListView: View {
                     List {
                         ForEach(appVM.movies) { movie in
                             NavigationLink(value: movie) {
-                                RowView(vm: RowVM(movie: movie))
+                                RowView(vm: RowVM(movie: movie,
+                                                  persistence: appVM.persistence))
                             }
                         }
-
                     }
                     .listStyle(.plain)
                     .navigationTitle("Popular movies")
                     .navigationDestination(for: MovieResult.self) { movie in
-                        MovieDetailView(vm: DetailVM(movie: movie))
+                        MovieDetailView(vm: DetailVM(movie: movie, persistence: appVM.persistence))
+                    }
+                    .refreshable {
+                        await appVM.initData()
                     }
                 } else {
                     VStack {
@@ -46,6 +49,7 @@ struct PopularMoviesListView: View {
                    isPresented: $appVM.showError) {
                 Button {
                     appVM.errorMsg = ""
+                    appVM.loading = false
                 } label: {
                     Text("OK")
                 }
@@ -65,7 +69,9 @@ struct PopularMoviesListView: View {
 
 struct PopularMoviesListView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularMoviesListView()
-            .environmentObject(MoviesVM())
+        NavigationStack {
+            PopularMoviesListView()
+                .environmentObject(MoviesVM.preview)
+        }
     }
 }

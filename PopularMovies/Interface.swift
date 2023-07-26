@@ -6,7 +6,7 @@
 //
 
 import Foundation
-let bearerToken = "eyJh--TOKEN--xx4w"
+let bearerToken = "eyJh--- TOKEN ---xx4w"
 
 extension URLQueryItem {
     static let language = URLQueryItem(name: "language", value: "es")

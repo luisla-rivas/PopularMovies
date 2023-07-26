@@ -26,7 +26,7 @@ final class PopularMoviesTests: XCTestCase {
     
     
     func testGetGenres() async throws -> [Genre] {
-        try await Network.shared.getJSON(request: .get(url: .getGenres, token: bearerToken), type: GenresAPI.self).genres
+        try await Network.shared.getJSON(request: .get(url: .getGenres(language: "en"), token: bearerToken), type: GenresAPI.self).genres
     }
     
 //    func testGetPopular() async throws -> [MovieResult] {

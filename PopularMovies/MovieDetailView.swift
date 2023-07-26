@@ -19,8 +19,7 @@ struct MovieDetailView: View {
                     .scaledToFit()
                     .frame(alignment: .top)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(.horizontal, 40)
-//                    .matchedGeometryEffect(id: "cover\(cellVM.movie.id)", in: namespace)
+                    .padding(.horizontal, 50)
             } else {
                 Image(systemName: "popcorn")
                     .resizable()
@@ -30,7 +29,20 @@ struct MovieDetailView: View {
                     .background(Color.secondary)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }
+
             VStack(alignment: .center) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(appVM.genresFor(vm.movie), id: \.self) { genre in
+                            Text(genre)
+                                .font(.caption)
+                                .foregroundStyle(.background)
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 5)
+                                .background(.gray).clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
+                    }
+                }
                 Text(vm.movie.title)
                     .font(.title2)
                     .multilineTextAlignment(.center)
@@ -55,7 +67,7 @@ struct MovieDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            MovieDetailView(vm: DetailVM(movie: .preview))
+            MovieDetailView(vm: DetailVM(movie: .preview, persistence: PersistencePreview.shared))
                 .environmentObject(MoviesVM.preview)
         }
     }

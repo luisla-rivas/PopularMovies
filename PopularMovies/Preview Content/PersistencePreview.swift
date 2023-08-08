@@ -40,6 +40,13 @@ final class PersistencePreview: PersistenceProtocol {
         return popularMovies
     }
     
+    func getPopularPage(_ page: Int, language: String) async throws -> PopularMoviePage {
+        let data = try Data(contentsOf: .popularMoviesTestFileURL)
+        let popularMoviePage = try JSONDecoder.decoderWithDate.decode(PopularMoviePage.self, from: data)
+        return popularMoviePage
+    }
+    
+    
     func getConfiguration() async throws -> ConfigurationAPI {
         return configuration
     }

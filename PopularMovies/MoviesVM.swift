@@ -27,7 +27,9 @@ final class MoviesVM:ObservableObject {
             }
         }
     }
-    
+    private var currentPageNumber = 0
+    private var numberOfMoviesInPage = 0
+    private var popularPages = [PopularMoviePage]()
     init(persistence: PersistenceProtocol = ModelPersistence.shared) {
         self.persistence = persistence
         self.languageID = UserDefaults.standard.string(forKey: "selectedLanguage") ?? "en"
@@ -36,8 +38,11 @@ final class MoviesVM:ObservableObject {
     
     @MainActor func initData() async {
         do {
-            (genres, movies) = try await (persistence.getGenres(language: languageID), persistence.getPopular(language: languageID))
-            //movies = []
+            let (genresFromAPI, currentPage) = try await (persistence.getGenres(language: languageID), persistence.getPopularPage(1, language: languageID))
+            self.genres = genresFromAPI
+            self.currentPageNumber = currentPage.page
+            self.numberOfMoviesInPage = currentPage.results.count
+            self.movies = currentPage.results
             //try await Task.sleep(for: .seconds(1))
             loading = false
             print("loaded")
@@ -45,6 +50,28 @@ final class MoviesVM:ObservableObject {
             errorMsg = error.description
         } catch {
             errorMsg = error.localizedDescription
+        }
+    }
+    
+    
+    @MainActor func loadPopularMovies(inPage page:Int, language:String) async {
+        do {
+            let query = try await persistence.getPopularPage(page, language: language)
+            if self.currentPageNumber < query.page {
+                self.movies.append(contentsOf: query.results)
+            }
+            self.currentPageNumber = query.page
+        } catch let error as NetworkError {
+            errorMsg = error.description
+        } catch {
+            errorMsg = error.localizedDescription
+        }
+    }
+    
+    func loadNewPageIfNeeded(actual: MovieResult)  {
+        guard let id = movies.firstIndex(of: actual) else { return }
+        if id == (movies.count - 2) {
+            Task(priority: .high) { await loadPopularMovies(inPage: currentPageNumber+1, language: languageID)}
         }
     }
     

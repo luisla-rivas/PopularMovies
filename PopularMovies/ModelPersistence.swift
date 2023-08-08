@@ -11,6 +11,7 @@ protocol PersistenceProtocol {
     var configuration: ConfigurationAPI { get }
     func getGenres(language: String) async throws -> [Genre]
     func getPopular(language: String) async throws -> [MovieResult]
+    func getPopularPage(_ page: Int, language: String) async throws -> PopularMoviePage
     func getConfiguration() async throws -> ConfigurationAPI
     func getPoster(posterPath:String, callback: @escaping (UIImage?) -> Void)
 }
@@ -38,6 +39,10 @@ final class ModelPersistence: PersistenceProtocol {
     
     func getPopular(language: String) async throws -> [MovieResult] {
         try await Network.shared.getJSON(request: .get(url: .popularMovies(language: language), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
+    }
+    
+    func getPopularPage(_ page: Int, language: String) async throws -> PopularMoviePage {
+        try await Network.shared.getJSON(request: .get(url: .popularMovies(language: language,page: page), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate)
     }
     
     func getConfiguration() async throws -> ConfigurationAPI {

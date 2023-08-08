@@ -39,6 +39,21 @@ final class PersistenceTest: XCTestCase {
         let popularMovies = try await Network.shared.getJSON(request: .get(url: .popularMovies(language: "en"), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate).results
         XCTAssertGreaterThan(popularMovies.count, 0)
     }
+    //func getPopularPage(_ page: Int, language: String) async throws -> PopularMoviePage
+    func testGetPopularPage() async throws { // -> [MovieResult]
+        XCTAssertEqual(URL.popularMovies(language: "en").scheme, "https")
+        XCTAssertEqual(URL.popularMovies(language: "en").host, "api.themoviedb.org")
+        XCTAssertEqual(URL.popularMovies(language: "en").relativePath, "/3/movie/popular")
+       
+        let popularMoviePage1 = try await Network.shared.getJSON(request: .get(url: .popularMovies(language: "en", page: 1), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate)
+        XCTAssertTrue(popularMoviePage1.page == 1, "Page number recovered must be 1")
+        XCTAssertGreaterThan(popularMoviePage1.results.count, 0)
+        
+        let popularMoviePage2 = try await Network.shared.getJSON(request: .get(url: .popularMovies(language: "en", page: 2), token: bearerToken), type: PopularMoviePage.self, decoder: .decoderWithDate)
+        XCTAssertTrue(popularMoviePage2.page == 2, "Page number recovered must be 2")
+        XCTAssertGreaterThan(popularMoviePage2.results.count, 0)
+
+    }
 
     func testGetConfiguration() async throws { // -> ConfigurationAPI
         XCTAssertEqual(URL.popularMovies(language: "en").scheme, "https")

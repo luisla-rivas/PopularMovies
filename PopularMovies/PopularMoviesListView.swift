@@ -19,6 +19,9 @@ struct PopularMoviesListView: View {
                             NavigationLink(value: movie) {
                                 RowView(vm: RowVM(movie: movie,
                                                   persistence: appVM.persistence))
+                                .onAppear() {
+                                    appVM.loadNewPageIfNeeded(actual: movie)
+                                }
                             }
                         }
                     }

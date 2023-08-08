@@ -11,6 +11,9 @@ let bearerToken = "eyJh--- TOKEN ---xx4w"
 extension URLQueryItem {
     static let language = URLQueryItem(name: "language", value: "es")
     static let region = URLQueryItem(name: "region", value: "ES")
+    static func page(_ number: Int) -> URLQueryItem {
+        URLQueryItem(name: "page", value: "\(number)")
+    }
 }
 
 extension URL {
@@ -23,9 +26,10 @@ extension URL {
 //    static let getGenres = movieAPI.appending (path: "genre/movie/list")
 //        .appending(queryItems: [.language])
     
-    static func popularMovies(language: String) -> URL {
+    static func popularMovies(language: String, page: Int = 1) -> URL {
         let queryLanguage = URLQueryItem(name: "language", value: language)
-        let url = movieAPI.appending(path: "movie/popular").appending(queryItems: [queryLanguage, .region])
+        let queryPage = URLQueryItem.page(page)
+        let url = movieAPI.appending(path: "movie/popular").appending(queryItems: [queryPage, queryLanguage, .region])
         //print("URL:  \(url)")
         return url
     }
